@@ -15,7 +15,7 @@ ENTRY = "fix: users can no longer submit the form twice, or once, or at all"
 
 def main() -> None:
     if not 1 <= len(ENTRY) <= 100:
-        raise SystemExit("entry must be 1-100 characters")
+        raise SystemExit(f"entry must be 1-100 characters, got {len(ENTRY)}")
     if ENTRY.strip() != ENTRY or "\n" in ENTRY or "\r" in ENTRY:
         raise SystemExit("entry must be a single line")
     if not ENTRY.strip():
@@ -27,6 +27,7 @@ def main() -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(ENTRY + "\n")
     os.chmod(path, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
+    print(ENTRY)
 
 
 if __name__ == "__main__":
